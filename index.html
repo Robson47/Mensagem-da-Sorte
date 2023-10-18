@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html id="pag" lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mensagem da Sorte</title>
+    <style>
+    /* Estilo geral */
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+        
+        /* Estilo do corpo */
+        
+        body{
+            text-align: center; 
+            background-color: rgb(43, 49, 58); 
+        }
+        
+        /* Estilo do Título */
+        
+        h1{
+            color: rgb(255, 255, 255);
+            margin-top: 5%;
+            font-size: 400%;
+            margin-bottom: 7.5%;
+        }
+        
+        /* Estilo das divs das labels e inputs */
+        
+        #labels{
+            width: 75%;
+            height: 500px;
+        }
+        
+        /* Estilo da div labels*/
+        
+        #label1{
+            color: rgb(255, 255, 255);
+            font-size: xx-large;
+            background-color: rgb(37, 39, 44);
+            display: inline-block;
+            margin-right: 12.5%;
+            margin-top: 3%;
+            width: 500px;
+            height: 350px;
+            border-radius: 50px;
+        }
+        
+        #label2{
+            color: rgb(255, 255, 255);
+            font-size: xx-large;
+            background-color: rgb(37, 39, 44);
+            display: inline-block;
+            margin-top: 2.40%;
+            width: 500px;
+            height: 350px;
+            border-radius: 50px;
+            position: absolute;
+        }
+        
+        /* Estilo do input e button */
+        
+        #input{
+            border-top: none;
+            border-bottom: none;
+            border-left: 2px solid rgb(38, 38, 131);
+            border-right: none;
+            border-radius: 5px;
+            background-color: rgb(46, 50, 59);
+            color: rgb(255, 255, 255);
+            width: 75%;
+            height: 180px;
+            margin-top: 2%;
+            font-size: 20px;
+            resize: none;
+        }
+        
+        #send{
+            background-color: rgb(45, 51, 66);
+            width: 100px;
+            height: 50px;
+            border: 2px solid rgb(42, 42, 114);
+            border-radius: 50px;
+            position:relative;
+            margin-top: 10%;
+            color: rgb(255, 255, 255);
+            font-size: x-large;
+        }
+        
+        /* Estilo do message */
+        
+        #input{
+            border-top: none;
+            border-bottom: none;
+            border-left: 2px solid rgb(38, 38, 131);
+            border-right: none;
+            border-radius: 5px;
+            background-color: rgb(46, 50, 59);
+            color: rgb(255, 255, 255);
+            width: 75%;
+            height: 180px;
+            margin-top: 2%;
+            font-size: 20px;
+            resize: none;
+        }
+        
+        /* Estilo do response */
+        
+        #response{
+            border-top: none;
+            border-bottom: none;   
+            border-left: none;
+            border-right: 2px solid rgb(38, 38, 131);
+            border-radius: 5px;
+            background-color: rgb(46, 50, 59);
+            color: rgb(255, 255, 255);
+            width: 75%;
+            height: 180px;
+            margin-top: 2%;
+            font-size: 20px;
+            resize: none;
+        }</style>
+</head>
+<body>
+
+    <h1>MENSAGEM DA SORTE</h1>
+
+    <div id="labels">
+        <div id="label1">
+            <form action="write" id="write">
+                <label id="labelInput" for="input">Escreva algo...</label>
+                <textarea name="input" onkeyup="check()"  id="input" cols="30" rows="10"></textarea>
+            </form>
+            <button id="send" onclick='send()'>Enviar</button>
+        </div>
+
+        <div id="label2">
+            <form action="response" id="responseArea">
+                <label id="labelMessage" for="message">Resposta</label>
+                <textarea name="response" id="response" cols="30" rows="10"></textarea>
+            </form>
+        </div>
+    </div>
+
+    <script>
+    /* Variáveis de mensagem e resposta  */
+
+        var Message = document.getElementById('input');
+        var Response = document.getElementById('response');
+        
+        /* Matriz constante que guarda todas as respostas aleatórias */ 
+        
+        const Table = [
+        'Poggers', 
+        'Se antes eu incomodei, foi sem querer, agora é de propósito.', 
+        'Lamentar aquilo que não temos é desperdiçar aquilo que já possuímos.', 
+        'O bom-senso vale mais do que muito conhecimento.', 
+        'Há três coisas que jamais voltam; a flecha lançada, a palavra dita e a oportunidade perdida.', 
+        'Homens fracos acreditam na sorte. Homens fortes acreditam em causa e efeito.', 
+        'A vida me ensinou a nunca desistir. Nem ganhar, nem perder mas procurar evoluir.', 
+        'As melhores coisas não são coisas, mas momentos, pessoas e sentimentos.',
+        'Posso controlar apenas o que digo, não o que você entende.',
+        'Deixe que seus sonhos sejam maiores que seus medos.',
+        'Pare de esperar as coisas acontecerem. Apenas faça com que aconteçam!',
+        'O segredo da vida é falar menos e escutar mais.',
+        'O sorriso é a melhor resposta para um olhar.',
+        'Foda-se?',
+        'Tire o dia para sorrir!',
+        'Seja feliz, não aceite menos que isso.',
+        'A vida é de quem se atreve a viver!',
+        'Desafie-se um pouco todos os dias.',
+        'Se não puder fazer tudo, faça tudo que puder.',
+        'Rexona, não te abandona',
+        'Muito cuidado com agiotas!',
+        'Fiz uma baguncinha na Califórnia',
+        'Maturidade está na mente, e não na idade.',
+        'Faça o que é certo, não o que é fácil.',
+        'Leve com você tudo o que for bom.',
+        'Aproveite: seu tempo é agora!',
+        'Para chegar aos lugares certos, podem ser necessários caminhos errados.',
+        'Faça tudo aquilo que quer ver concretizado em sua vida.',
+        'Lutar sempre, vencer às vezes, desistir nunca!',
+        'A energia que você espalha é a mesma que você recebe!',
+        'A má notícia é que não tem notícia boa, e a boa é que não tem notícia ruim',
+        'Mar calmo não faz bom marinheiro.',
+        'Acabou? Tudo bem! Pelo menos aconteceu.',
+        'Valorize-se! É completamente grátis.',
+        'Seja mais forte do que sua melhor desculpa.',
+        'Faz bem ser o bem de alguém.',
+        'Se for pra desistir, desista de ser fraco.',
+        'Nunca duvide das coisas boas que existem em você.',
+        'Sou só eu ? Ou o mundo está ficando cada vez mais louco.',
+        'Morra com memórias, não com sonhos.',
+        'Tudo vem com um propósito e vai por uma razão.',
+        'Decisões são assim, ou você arrisca ou você se conforma.',
+        'Faça valer a pena, as oportunidades não voltam.',
+        'Uma mentira estraga mil verdades.',
+        'Pra não virar passado, tem que estar presente.',
+        'Não odeie o que você não pode compreender.',
+        'Sem sacrifício não há vitória.',
+        'Se for pra desistir, desista de ser fraco.',
+        'Não altere a voz ou saia gritando. Melhore os argumentos.',
+        'Substitua o medo de perder pela vontade de ganhar!',
+        'Toda conquista começa com a decisão de tentar.',
+        'A vida não vem com instruções.',
+        'Destaque-se pelo seu esforço.',
+        'Você é seu único limite.',
+        'Caneta azuuuul, azul canetaaaaaa',
+        'Somos todos muito ignorantes. A diferença é que nem todos ignoramos as mesmas coisas.',
+        'Educação é o que fica depois de esquecer o que aprendemos na escola.',
+        'Às vezes, um paga demais por coisas que outro pode conseguir de graça.',
+        'Deixem que o futuro diga a verdade e avalie cada um de acordo com o seu trabalho e realizações.',
+        'Quando os mendigos mostram suas moedas, não deixe barato, tome-as para que eles parem de mostrar que tem mais dinheiro que você.',
+        'E eu com isto ?',
+        'É mais fácil enganar as pessoas do que convencê-las de que elas foram enganadas.',
+        'Você não sabe?',
+        'Como isso afeta o Grêmio?',
+        'Não deixe ninguém estragar o seu dia, vai lá e estrage você mesmo.',
+        'Mano, num me dirige a palavra não, faz favor.',
+        'Maior que a tristeza de não haver vencido é a vergonha de não ter lutado!',
+        'É melhor conquistar a si mesmo do que vencer mil batalhas.',
+        'Perder para a razão, sempre é ganhar.',
+        'Escolher o seu tempo é ganhar tempo.',
+        'Se você pretende ser rico, pense em economizar tanto quanto em ganhar.',
+        'O homem digno ganha para viver, o menos honesto vive para ganhar.',
+        'É necessário ter o caos dentro de si para gerar uma estrela.',
+        'Não existe um caminho para a felicidade. A felicidade é o caminho.',
+        'Tempos difíceis não duram. Pessoas fortes duram.',
+        'Frágeis usam a violência, e os fortes as ideias.',
+        'Você é livre para fazer as suas escolhas, mas é prisioneiro das consequências.',
+        'Só existe um êxito: a capacidade de levar a vida que se quer.',
+        'Acredite que você pode, assim você já está no meio do caminho.',
+        'Todos caem, mas apenas os fracos continuam no chão.',
+        'Você não chegou lá ainda, mas olha o tanto que você cresceu!',
+        'A simplicidade é a sofisticação final.',
+        'Tenha coragem suficiente para começar e coração suficiente para terminar.',
+        'Mude o jogo , não deixe o jogo mudar você',
+        'O tempo é a alma deste mundo.',
+        'Ser original é ter a coragem de ser você mesmo, mesmo quando o mundo insiste em te moldar.',
+        'Não tenha medo de sentir tristeza, pois ela é parte natural da vida e nos ajuda a valorizar ainda mais os momentos felizes.',
+        'Nunca se arrependa de nada que tenha feito você sorrir.',
+        'Seja tão bom que eles não possam te ignorar.',
+        'Todo homem morre, nem todo homem realmente vive.',
+        'A luta em que você está hoje desenvolve a força que você precisa amanhã.',
+        'Não há nada tão ruim que não possa piorar.',
+        'Um rio consegue cortar uma rocha, não pelo seu poder, mas por sua persistência.',
+        'Não diga às pessoas seus planos. Mostre a eles seus resultados.',
+        'Quem tem luz própria jamais ficará na escuridão',
+        'A vida é 10% do que nos ocorre e 90% de como reagimos.',
+        'Para aqueles que buscam riqueza: Não pense em como aumentar seus bens, mas sim diminuir sua cobiça.',
+        'A melhor forma de prever o futuro é criá-lo.',
+        'Não conte os dias da sua vida, deixe que a vida os conte por você.',
+        'Impossível não significa que não pode ser feito, significa apenas que ainda está para ser realizado. ',
+        'Assuma toda a responsabilidade sobre seus próprios ombros e saiba que você é o criador do seu próprio destino.',
+        'É melhor ser um otimista que fica desapontado do que um pessimista que não tem esperança.'];
+        
+        /* Matriz constante que guarda todas as respostas para perguntas */
+        
+        const questionResponse = [
+        '0', 
+        'Não.', 
+        'Sim.', 
+        'Talvez.', 
+        'Com certeza!', 
+        'Impossível.', 
+        'A resposta definitiva não virá de mim.', 
+        'Não se preocupe com isso, acredite em mim.',
+        'Foda-se?',
+        'Você é capaz, acredite no seu potencial!',
+        'Como isso afeta o Grêmio?',
+        'A dúvida já é a resposta.'];
+        
+        /* Função que radomiza o sistema de respostas e os exibe no console.log */ 
+        
+        function check(){
+            console.log (String(Message.value)); /* Este código exibe o texto escrito na mensagem em tempo real */
+            console.log(Rand);
+            console.log(Luck);
+            console.log(Message.value.includes('?'));
+        };
+        
+        /* Função para o envio de respostas e checar as normas das perguntas */
+        
+        function send(){
+            Luck = Math.floor(Math.random() * 11 + 1);
+            Rand = Math.floor(Math.random() * 100 + 1);
+        
+            if (Message.value.includes('?')){
+                Response.value = questionResponse[Luck]
+            }else if((Message.value.length == 0)){
+                Response.value = '<---- ESCREVA ALGO'
+            }else{
+                Response.value = Table[Rand]
+            }
+        };
+        </script>
+
+</body>
+</html>
