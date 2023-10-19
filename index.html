@@ -125,7 +125,7 @@
             resize: none;
         }</style>
 </head>
-<body>
+<body onkeyup="check()">
 
     <h1>MENSAGEM DA SORTE</h1>
 
@@ -133,7 +133,7 @@
         <div id="label1">
             <form action="write" id="write">
                 <label id="labelInput" for="input">Escreva algo...</label>
-                <textarea name="input" onkeyup="check()"  id="input" cols="30" rows="10"></textarea>
+                <textarea name="input" id="input" cols="30" rows="10"></textarea>
             </form>
             <button id="send" onclick='send()'>Enviar</button>
         </div>
@@ -284,7 +284,8 @@
         };
         
         /* Função para o envio de respostas e checar as normas das perguntas */
-        
+        var Luck = 0;
+        var Rand = 0;
         function send(){
             Luck = Math.floor(Math.random() * 11 + 1);
             Rand = Math.floor(Math.random() * 100 + 1);
